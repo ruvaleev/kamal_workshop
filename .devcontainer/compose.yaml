@@ -1,4 +1,4 @@
-name: "kamal_workshop"
+# name: "kamal_workshop"
 
 services:
   rails-app:
