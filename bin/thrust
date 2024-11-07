@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -e
+
+# Запуск thruster с переданными аргументами
+exec bundle exec thruster "$@"
