@@ -1,13 +1,13 @@
 # Name of your application. Used to uniquely configure containers.
-service: my-app
+service: kamal-workshop
 
 # Name of the container image.
-image: my-user/my-app
+image: ruvaleev/kamal-workshop
 
 # Deploy to these servers.
 servers:
   web:
-    - 192.168.0.1
+    - 203.161.56.139
   # job:
   #   hosts:
   #     - 192.168.0.1
@@ -39,17 +39,19 @@ builder:
 
 # Inject ENV variables into containers (secrets come from .kamal/secrets).
 #
-# env:
-#   clear:
-#     DB_HOST: 192.168.0.2
-#   secret:
-#     - RAILS_MASTER_KEY
+env:
+  # clear:
+  #   DB_HOST: 203.161.56.139
+  secret:
+    - RAILS_MASTER_KEY
 
 # Aliases are triggered with "bin/kamal <alias>". You can overwrite arguments on invocation:
 # "bin/kamal logs -r job" will tail logs from the first server in the job section.
 #
-# aliases:
-#   shell: app exec --interactive --reuse "bash"
+aliases:
+  shell: app exec --interactive --reuse "bash"
+  console: app exec --interactive --reuse "rails c"
+  watch-logs: app logs -f
 
 # Use a different ssh user than root
 #
