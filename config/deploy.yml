@@ -51,7 +51,7 @@ env:
 #
 aliases:
   shell: app exec --interactive --reuse "bash"
-  console: app exec --interactive --reuse "rails c"
+  console: app exec --interactive --reuse "bin/rails c"
   watch-logs: app logs -f
 
 # Use a different ssh user than root
