@@ -42,7 +42,7 @@ builder:
 #
 env:
   clear:
-    DB_HOST: db
+    DB_HOST: 203.161.56.139
   secret:
     - KAMAL_WORKSHOP_DATABASE_PASSWORD
     - POSTGRES_PASSWORD
