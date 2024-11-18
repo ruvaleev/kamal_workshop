@@ -44,6 +44,7 @@ env:
   clear:
     DB_HOST: 203.161.56.139
   secret:
+    - KAMAL_WORKSHOP_DATABASE_PASSWORD
     - RAILS_MASTER_KEY
 
 # Aliases are triggered with "bin/kamal <alias>". You can overwrite arguments on invocation:
