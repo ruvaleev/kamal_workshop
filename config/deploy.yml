@@ -90,6 +90,7 @@ accessories:
         POSTGRES_USER: kamal_workshop
       secret:
         - POSTGRES_PASSWORD
+        - KAMAL_WORKSHOP_DATABASE_PASSWORD
     directories:
       - data:/var/lib/postgresql/data
 
