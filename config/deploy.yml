@@ -41,8 +41,8 @@ builder:
 # Inject ENV variables into containers (secrets come from .kamal/secrets).
 #
 env:
-  # clear:
-  #   DB_HOST: 203.161.56.139
+  clear:
+    DB_HOST: 203.161.56.139
   secret:
     - RAILS_MASTER_KEY
 
@@ -78,6 +78,19 @@ asset_path: /rails/public/assets
 
 # Use accessory services (secrets come from .kamal/secrets).
 #
+accessories:
+  db:
+    image: postgres:16.1
+    host: 203.161.56.139
+    port: 5432
+    env:
+      clear:
+        POSTGRES_USER: kamal_workshop
+      secret:
+        - POSTGRES_PASSWORD
+    directories:
+      - data:/var/lib/postgresql/data
+
 # accessories:
 #   db:
 #     image: mysql:8.0
