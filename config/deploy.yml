@@ -43,6 +43,7 @@ builder:
 env:
   clear:
     DB_HOST: 203.161.56.139
+    PROMETHEUS_EXPORTER_HOST: 203.161.56.139
   secret:
     - KAMAL_WORKSHOP_DATABASE_PASSWORD
     - POSTGRES_PASSWORD
@@ -93,6 +94,38 @@ accessories:
         - KAMAL_WORKSHOP_DATABASE_PASSWORD
     directories:
       - data:/var/lib/postgresql/data
+
+  prometheus:
+    image: prom/prometheus
+    host: 203.161.56.139
+    port: 9100
+    files:
+      - ./config/deploy/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    volumes:
+      - prometheus-data:/prometheus
+    cmd: "--config.file=/etc/prometheus/prometheus.yml"
+    options:
+      publish:
+        - "9090:9090"
+
+  prometheus_exporter:
+    image: ghcr.io/ruvaleev/kamal-workshop:latest
+    cmd: "bundle exec prometheus_exporter -b 0.0.0.0 -p 9394"
+    host: 203.161.56.139
+    port: 9394
+
+  grafana:
+    image: grafana/grafana
+    host: 203.161.56.139
+    port: 4000
+    volumes:
+      - grafana_db:/var/lib/grafana
+    env:
+      clear:
+        GF_SERVER_HTTP_PORT: 4000
+        GF_SERVER_ROOT_URL: http://203.161.56.139
+      secret:
+        - GF_SECURITY_ADMIN_PASSWORD
 
 # accessories:
 #   db:
