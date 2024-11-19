@@ -19,9 +19,13 @@ ENV RAILS_ENV="production" \
     
 # Install base packages
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libjemalloc2 libvips sqlite3 && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
-
+    apt-get install --no-install-recommends -y \
+        curl \
+        libjemalloc2 \
+        libvips \
+        libpq-dev \
+        libpq5 && \
+    rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 # Throw-away build stage to reduce size of final image
 FROM base AS build
@@ -46,9 +50,6 @@ RUN bundle exec bootsnap precompile app/ lib/
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
-
-
-
 # Final stage for app image
 FROM base
 
@@ -65,6 +66,8 @@ USER 1000:1000
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
+# Expose db port
+EXPOSE 5432
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
 CMD ["./bin/thrust", "./bin/rails", "server"]
