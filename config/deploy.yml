@@ -115,6 +115,7 @@ accessories:
       - grafana_db:/var/lib/grafana
     env:
       clear:
+        GF_SERVER_HTTP_PORT: 4000
         GF_SERVER_ROOT_URL: http://203.161.56.139
       secret:
         - GF_SECURITY_ADMIN_PASSWORD
