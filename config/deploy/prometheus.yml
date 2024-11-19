@@ -1,0 +1,10 @@
+global:
+  scrape_interval: 15s
+  scrape_timeout: 3s
+
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets: ['203.161.56.139:9090']
+        labels:
+          instance: 'metrics.kamal-workshop'
