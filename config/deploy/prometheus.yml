@@ -9,7 +9,7 @@ scrape_configs:
         labels:
           instance: 'metrics.kamal-workshop'
 
-  - job_name: 'rails_app'
-      static_configs:
-        - targets: ['203.161.56.139:9394']
+  - job_name: rails_app
+    static_configs:
+      - targets: ['203.161.56.139:9394']
         
